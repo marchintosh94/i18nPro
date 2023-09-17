@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
-    /* Language and Environment */
     "target": "es2016",
-    /* Modules */
     "module": "commonjs",
     "paths": {
       "@/utils": [
@@ -15,16 +13,12 @@
         "./src/i18npro/index"
       ],
     },
-    //"rootDir": "./src",
+    "resolveJsonModule": true,
     "baseUrl": "./",
     "types": ["jest", "node"],
-    /* Emit */
     "declaration": true, 
     "outDir": "./dist",
-    /* Interop Constraints */
-    //"esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    /* Type Checking */
     "strict": true,
     "noImplicitAny": true,
     "skipLibCheck": true

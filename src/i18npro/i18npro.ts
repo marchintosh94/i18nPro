@@ -1,5 +1,6 @@
 import { DynamicData, I18Message, I18Dictionary } from "@/types";
-import { http } from "@/utils";
+import { binarySearch, http } from "@/utils";
+import { sortObjectKeysToLower } from "@/utils";
 
 class _i18nPro {
   private storedLocales: string[] = [];
@@ -24,7 +25,7 @@ class _i18nPro {
   };
 
   private setLocaleMessages = (locale: string, messages: I18Message) => {
-    this.messages = { ...this.messages, [locale]: messages };
+    this.messages = { ...this.messages, [locale]: sortObjectKeysToLower(messages) };
   };
 
   /**
@@ -61,10 +62,10 @@ class _i18nPro {
       });
   }
 
-  public loadMessages = (
+  public loadMessages(
     locale: string,
     apiUrl: string
-  ): Promise<string | undefined> => {
+  ): Promise<string | undefined> {
     return new Promise<string | undefined>((resolve, reject) => {
       if (this.isLoadingLanguage) {
         return resolve(undefined);
@@ -88,34 +89,53 @@ class _i18nPro {
         });
       }
     });
-  };
+  }
 
-  public t(value: string, ...targs: any[]): string {
-    const args = targs.flat();
-    const plural = this.getPluralFromArgs(args);
-    const dynamicData = this.getDynamicDataFromArgs(args);
+  public loadLocalMessages(
+    locale: string,
+    messages: string | Record<string, string | number>
+  ): Promise<string> {
+    const dictionary: Record<string, string | number> =
+      typeof messages === "string"
+        ? (JSON.parse(messages) as Record<string, string | number>)
+        : messages;
+
+    const error = this.checkMessageObjectFormat(dictionary);
+    if (error) {
+      return Promise.reject(error);
+    }
+    this.setLocale(locale);
+    this.setLocaleMessages(locale, dictionary);
+    return Promise.resolve(locale);
+  }
+
+  public t(value: string, ...args: any[]): string {
+    const flatArgs = args.flat();
+    const plural = this.getPluralFromArgs(flatArgs);
+    const dynamicData = this.getDynamicDataFromArgs(flatArgs);
 
     const locale = this.locale || this.defaultLocale;
+    const translationKey =
+      this.messages[locale] && this.messages[locale][value.toLocaleLowerCase()]
+        ? value.toLocaleLowerCase()
+        : undefined;
 
-    const translationKey = Object.keys(this.messages).length
-      ? Object.keys(this.messages[locale]).find(
-          (key) =>
-            key.toString().toLowerCase() === value.toString().toLowerCase()
-        )
-      : undefined;
-
+    // console.log(
+    //   translationKey
+    //     ? `Found key: ${translationKey} => ${this.messages[locale][translationKey]}`
+    //     : "Key not found"
+    // );
     let translation = translationKey
-      ? this.messages[locale][translationKey]
+      ? `${this.messages[locale][translationKey]}`
       : value;
 
     if (translationKey && plural) {
       translation = translation.split("|")[plural - 1] || value;
     }
-    translation;
     if (dynamicData) {
-      Object.keys(dynamicData).forEach((key) => {
+      for (const key in dynamicData) {
         translation = translation!.replace(`{${key}}`, dynamicData[key]);
-      });
+      }
     }
 
     return translation.trim();
