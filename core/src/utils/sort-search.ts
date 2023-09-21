@@ -1,8 +1,8 @@
-export const sortObjectKeysToLower = <T extends object>(obj: T): T => {
+export const objectKeysToLower = <T extends object>(obj: T): T => {
   const mappedObject: [string, any][] = Object.entries(obj).map(
     ([key, val]) => [key.toLowerCase(), val]
   );
-  const sortedKeys = new Map([...mappedObject].sort());
+  const sortedKeys = new Map([...mappedObject]);
   return Object.fromEntries(sortedKeys) as T;
 };
 
@@ -16,7 +16,7 @@ export const binarySearch = (
 
   while (left <= right) {
     const mid = Math.floor((left + right) / 2);
-    const current = arr[mid].toString().toLowerCase();
+    const current = arr[mid]!.toString().toLowerCase();
     if (current === searchValue) {
       return arr[mid]; // Found the target, return its index
     } else if (current < searchValue) {

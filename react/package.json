@@ -1,0 +1,23 @@
+{
+  "name": "i18n-pro-react",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "rm -rf lib && tsc --build",
+    "local:pack": "npm pack --pack-destination ../examples"
+  },
+  "dependencies": {
+    "react": "16 - 18",
+    "react-dom": "16 - 18",
+    "i18n-pro": "1.0.0"
+  },
+  "files": [
+    "lib"
+  ],
+  "devDependencies": {
+    "@types/react": "^18.2.22",
+    "typescript": "^5.2.2"
+  }
+}

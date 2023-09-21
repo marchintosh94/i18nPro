@@ -1,24 +1,24 @@
-import { HttpOptions } from "@/types";
-import { http } from "@/utils";
+import { HttpOptions } from "../../types";
+import { http } from "../../utils";
 
 describe("Test http method", () => {
   const successfulResponse = Promise.resolve<Response>({
     json: () => Promise.resolve({ succes: true }),
     ok: true,
     status: 200,
-    headers: {} as Headers,
+    headers: {} as Headers
   } as Response);
   
   const responseKo = Promise.resolve<Response>({
     json: () => Promise.resolve({ succes: true }),
     ok: false,
     status: 500,
-    headers: {} as Headers,
+    headers: {} as Headers
   } as Response);
 
   const responseError = Promise.reject({
     status: 500,
-    message: 'error',
+    message: 'error'
   });
 
   const httpArguments: HttpOptions = {
@@ -26,8 +26,8 @@ describe("Test http method", () => {
     url: "/test",
     data: { data: 123 },
     headers: {
-      Authorization: "Bearer token",
-    },
+      Authorization: "Bearer token"
+    }
   };
 
   it("Check all given properties match", async () => {
@@ -40,8 +40,8 @@ describe("Test http method", () => {
       body: undefined,
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer token",
-      },
+        Authorization: "Bearer token"
+      }
     } as RequestInit);
   });
 
@@ -56,8 +56,8 @@ describe("Test http method", () => {
       body: JSON.stringify({ data: 123 }),
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer token",
-      },
+        Authorization: "Bearer token"
+      }
     } as RequestInit);
 
     expect(data).toEqual({ succes: true });
@@ -86,7 +86,7 @@ describe("Test http method", () => {
 
     expect(data).rejects.toEqual({
       status: 500,
-      message: "error",
+      message: "error"
     });
   });
 });

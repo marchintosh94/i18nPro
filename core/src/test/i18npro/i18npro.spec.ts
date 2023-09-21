@@ -1,4 +1,4 @@
-import { i18nPro } from "@/i18npro"
+import { i18nPro } from "../../i18npro"
 
 describe('Test i18nPro class with all its methods', () => {
 

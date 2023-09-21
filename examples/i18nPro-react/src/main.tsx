@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
-import { i18nPro } from 'i18n-pro'
+import { i18nPro } from 'i18n-pro-react'
 
 i18nPro.defaultLocale = 'en-US'
 

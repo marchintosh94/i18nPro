@@ -1,0 +1,11 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "lib",
+    "rootDir": "src",
+    "paths": {
+      "i18n-pro": ["./node_modules/i18n-pro/dist/"]
+    }
+  },
+  "include": ["src"],
+}

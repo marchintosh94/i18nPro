@@ -1,4 +1,4 @@
-import { HttpOptions } from "@/types"
+import { HttpOptions } from "../types"
 
 /**@internal */
 export const http = <T>({method, url, data, headers}: HttpOptions): Promise<T> => {

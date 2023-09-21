@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+      "target": "ES6",
+      "module": "ES6",
+      "declaration": true, 
+      "declarationMap": true,
+      "esModuleInterop": true,
+      "inlineSourceMap": true,
+      "inlineSources": true,
+      "strict": true,
+      "noImplicitAny": true,
+      "noUncheckedIndexedAccess": true,
+    "allowUnreachableCode": false,
+      "skipLibCheck": true,
+      "moduleResolution": "node",
+    }
+  }
+  

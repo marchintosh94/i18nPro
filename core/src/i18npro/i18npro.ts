@@ -1,6 +1,5 @@
-import { DynamicData, I18Message, I18Dictionary } from "@/types";
-import { binarySearch, http } from "@/utils";
-import { sortObjectKeysToLower } from "@/utils";
+import { DynamicData, I18Message, I18Dictionary } from "../types";
+import { http, objectKeysToLower } from "../utils";
 
 class _i18nPro {
   private storedLocales: string[] = [];
@@ -19,13 +18,13 @@ class _i18nPro {
     return (typeof args[0] === "object" ? args[0] : args[1]) as DynamicData;
   }
 
-  private setLocale = (locale: string) => {
+  private setLocale(locale: string) {
     this.storedLocales = [...new Set([...this.storedLocales, locale])];
     this.locale = locale;
   };
 
-  private setLocaleMessages = (locale: string, messages: I18Message) => {
-    this.messages = { ...this.messages, [locale]: sortObjectKeysToLower(messages) };
+  private setLocaleMessages(locale: string, messages: I18Message) {
+    this.messages = { ...this.messages, [locale]: objectKeysToLower(messages) };
   };
 
   /**
@@ -116,17 +115,12 @@ class _i18nPro {
 
     const locale = this.locale || this.defaultLocale;
     const translationKey =
-      this.messages[locale] && this.messages[locale][value.toLocaleLowerCase()]
+      this.messages[locale] && this.messages[locale]![value.toLocaleLowerCase()]
         ? value.toLocaleLowerCase()
         : undefined;
 
-    // console.log(
-    //   translationKey
-    //     ? `Found key: ${translationKey} => ${this.messages[locale][translationKey]}`
-    //     : "Key not found"
-    // );
     let translation = translationKey
-      ? `${this.messages[locale][translationKey]}`
+      ? `${this.messages[locale]![translationKey]}`
       : value;
 
     if (translationKey && plural) {
@@ -134,7 +128,7 @@ class _i18nPro {
     }
     if (dynamicData) {
       for (const key in dynamicData) {
-        translation = translation!.replace(`{${key}}`, dynamicData[key]);
+        translation = translation!.replace(`{${key}}`, dynamicData[key] || key);
       }
     }
 
