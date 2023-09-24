@@ -2,11 +2,12 @@ import { useEffect } from "react";
 
 import "./App.css";
 
-import { i18nPro } from "i18n-pro-react";
+import { i18nPro, useI18nPro } from "i18n-pro-react";
 
 function App() {
+  const { changeLanguage } = useI18nPro()
   useEffect(() => {
-    i18nPro.loadMessages("en-US", "/en-US.json");
+    changeLanguage("en-US", "/en-US.json");
   }, []);
 
   return (
@@ -16,7 +17,11 @@ function App() {
       <div className="grid">
         <div>{i18nPro.t("Cognome")}</div>
 
-        <button onClick={() => i18nPro.loadMessages("it-IT", "/it-IT.json")}>
+        <button
+          onClick={() =>
+            changeLanguage("it-IT", "/it-IT.json")
+          }
+        >
           Change
         </button>
       </div>

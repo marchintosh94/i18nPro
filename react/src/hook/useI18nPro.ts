@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { i18nPro } from "i18n-pro";
+import { i18nPro } from "@marchintosh94/i18n-pro";
 
 interface ChangeLanguage {
   (
@@ -38,7 +38,7 @@ export const useI18nPro = () => {
     if(apiUrl){
       return i18nPro.loadMessages(newLocale, apiUrl).then(updateLocaleState)
     }
-    return Promise.reject({message: 'Argouments provided are not valid', data: {newLocale, args: args[1]}})
+    return Promise.reject({message: 'Arguments provided are not valid', data: {newLocale, args: args[1]}})
   }
 
   return {

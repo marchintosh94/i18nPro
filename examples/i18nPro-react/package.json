@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "i18n-pro-react": "1.0.0",
+    "i18n-pro-react": "file:../i18n-pro-react-0.0.0.tgz",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

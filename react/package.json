@@ -1,20 +1,20 @@
 {
   "name": "i18n-pro-react",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "type": "module",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "rm -rf lib && tsc --build",
+    "build": "rm -rf dist && tsc --build",
     "local:pack": "npm pack --pack-destination ../examples"
   },
   "dependencies": {
+    "@marchintosh94/i18n-pro": "0.0.0",
     "react": "16 - 18",
-    "react-dom": "16 - 18",
-    "i18n-pro": "1.0.0"
+    "react-dom": "16 - 18"
   },
   "files": [
-    "lib"
+    "dist"
   ],
   "devDependencies": {
     "@types/react": "^18.2.22",
