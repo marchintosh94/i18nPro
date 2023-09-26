@@ -1,8 +1,18 @@
 import { i18nPro } from "../../i18npro";
+import os from 'os'
 
 const getRandomInt = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+function measureMemoryUsage() {
+  const used = process.memoryUsage();
+ 
+  console.log(`Memory Usage:`);
+  console.log(`  - RSS: ${Math.round(used.rss / (1024 * 1024))} MB`);
+  console.log(`  - Heap Total: ${Math.round(used.heapTotal / (1024 * 1024))} MB`);
+  console.log(`  - Heap Used: ${Math.round(used.heapUsed / (1024 * 1024))} MB`);
+}
+
 
 
 describe("Test i18nPro performance", () => {
@@ -35,6 +45,7 @@ describe("Test i18nPro performance", () => {
       [{ translations: translationCount, time: `${delta} ms` }],
       ["translations", "time"]
     );
+    measureMemoryUsage()
     expect(delta).toBeLessThanOrEqual(80);
   })
 });

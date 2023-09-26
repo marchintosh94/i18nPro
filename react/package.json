@@ -1,21 +1,35 @@
 {
-  "name": "i18n-pro-react",
-  "version": "0.0.0",
+  "name": "@marchintosh94/i18npro-react",
+  "version": "0.1.0",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": ["dist"],
   "scripts": {
     "build": "rm -rf dist && tsc --build",
     "local:pack": "npm pack --pack-destination ../examples"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marchintosh94/i18nPro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marchintosh94/i18nPro/issues"
+  },
+  "keywords": [
+    "js",
+    "i18n",
+    "typescript",
+    "react",
+    "next"
+  ],
+  "author": "marchintosh94 <marcobaratto@icloud.com> (https://marcobaratto.dev/)",
+  "license": "MIT",
   "dependencies": {
-    "@marchintosh94/i18n-pro": "0.0.0",
+    "@marchintosh94/i18n-pro": "0.1.0",
     "react": "16 - 18",
     "react-dom": "16 - 18"
   },
-  "files": [
-    "dist"
-  ],
   "devDependencies": {
     "@types/react": "^18.2.22",
     "typescript": "^5.2.2"
