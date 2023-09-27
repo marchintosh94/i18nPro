@@ -32,7 +32,7 @@ jobs:
           node-version: 16
       - run: cd ./core && npm ci
       - run: cd ./core && npm run build
-      - run: ls -la && cd ./code &&  echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> .npmrc && echo "registry=https://registry.npmjs.org/" >> .npmrc && echo "always-auth=true" >> .npmrc
+      - run: ls -la && cd ./core &&  echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> .npmrc && echo "registry=https://registry.npmjs.org/" >> .npmrc && echo "always-auth=true" >> .npmrc
         env: 
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
       - run: cd ./core && npm publish --access=public
