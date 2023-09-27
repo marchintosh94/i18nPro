@@ -17,11 +17,11 @@ jobs:
         with:
           node-version: 16
       - name: Test
-        run: cd core 
-          echo ${{ vars.CORE_PUBLISH_KWD }}
-          echo contains(github.event.release.body, ${{vars.CORE_PUBLISH_KWD}})
-          npm ci
-          npm test
+        run: cd ./core 
+      - run: echo ${{ vars.CORE_PUBLISH_KWD }}
+      - run: echo ${{contains(github.event.release.body, ${{vars.CORE_PUBLISH_KWD}})}}
+      - run: npm ci
+      - run: npm test
          
 
   publish-core:
