@@ -1,9 +1,10 @@
-export {
+export type {
     DynamicData,
     I18Message,
-    I18Dictionary
+    I18Dictionary,
+    ChangeLanguage
 } from './i18npro.types'
-export {
+export type {
     HttpMethod,
     HttpOptions
 } from './http.types'

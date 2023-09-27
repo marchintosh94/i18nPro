@@ -2,8 +2,6 @@
   "extends": "./tsconfig.json",
   "exclude": [
     "**/*.spec.ts",
-    "**/*.test.ts",
-    "node_modules",
-    "jest.config.*"
+    "**/*.test.ts"
   ]
 }
