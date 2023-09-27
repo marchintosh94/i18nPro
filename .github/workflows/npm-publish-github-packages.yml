@@ -16,11 +16,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: cd core 
-      - name: Clean Install
-        run: npm ci
       - name: Test
-        run: npm test
+        run: cd core 
+          echo ${{ vars.CORE_PUBLISH_KWD }}
+          echo contains(github.event.release.body, ${{vars.CORE_PUBLISH_KWD}})
+          npm ci
+          npm test
+         
 
   publish-core:
     needs: test-core
