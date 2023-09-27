@@ -10,7 +10,7 @@ on:
 jobs:
   test-core:
     runs-on: ubuntu-latest
-    if: contains(github.event.release.body, ${{vars.CORE_PUBLISH_KWD}})
+    if: contains(github.event.release.body, vars.CORE_PUBLISH_KWD)
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -19,7 +19,6 @@ jobs:
       - name: Test
         run: cd ./core 
       - run: echo ${{ vars.CORE_PUBLISH_KWD }}
-      - run: echo ${{contains(github.event.release.body, ${{vars.CORE_PUBLISH_KWD}})}}
       - run: npm ci
       - run: npm test
          
