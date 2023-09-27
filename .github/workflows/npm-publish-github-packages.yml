@@ -28,14 +28,11 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
         with:
           node-version: 16
-          registry-url: https://npm.pkg.github.com/
       - run: cd ./core && npm ci
       - run: cd ./core && npm run build
-      - run: cd ./code && 
-          echo "//registry.npmjs.org/:_authToken=${secrets.NPM_TOKEN}" >> .npmrc &&
-          echo "registry=https://registry.npmjs.org/" >> .npmrc &&
-          echo "always-auth=true" >> .npmrc
+      - run: ls -la && cd ./code &&  echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> .npmrc && echo "registry=https://registry.npmjs.org/" >> .npmrc && echo "always-auth=true" >> .npmrc
+        env: 
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
       - run: cd ./core && npm publish --access=public
