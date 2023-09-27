@@ -8,11 +8,21 @@ on:
     types: [published]
 
 jobs:
-  test-core:
+  core_check:
     runs-on: ubuntu-latest
-    env:
-      CORE_PUBLISH_KWD: ${{secrets.CORE_PUBLISH_KWD}}
-    if: contains(github.event.release.body, ${{CORE_PUBLISH_KWD}})
+    outputs:
+      publish_core: contains(github.event.release.body, ${{steps.release_body_check.outputs.output}})
+    steps:
+      - name: Check Release Body
+        id: release_body_check
+        run: |
+          echo "::set-output name=output::${{secrets.CORE_PUBLISH_KWD}}"
+        
+
+  test-core:
+    needs: core_check
+    runs-on: ubuntu-latest
+    if: ${{needs.core_check.outputs.publish_core}}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
