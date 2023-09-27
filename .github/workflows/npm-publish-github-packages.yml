@@ -16,10 +16,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Test
-        run: cd ./core 
-      - run: npm ci
-      - run: npm test
+      - run: cd ./core && npm ci
+      - run: cd ./core && npm test
          
 
   publish-core:
@@ -34,9 +32,8 @@ jobs:
         with:
           node-version: 16
           registry-url: https://npm.pkg.github.com/
-      - run: cd ./core
-      - run: npm ci
-      - run: npm run build
-      - run: npm publish --access=public
+      - run: cd ./core && npm ci
+      - run: cd ./core && npm run build
+      - run: cd ./core && npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
