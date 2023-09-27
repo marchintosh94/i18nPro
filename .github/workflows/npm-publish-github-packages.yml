@@ -10,7 +10,9 @@ on:
 jobs:
   test-core:
     runs-on: ubuntu-latest
-    if: contains(github.event.release.body, ${{secrets.CORE_PUBLISH_KWD}})
+    env:
+      CORE_PUBLISH_KWD: ${{secrets.CORE_PUBLISH_KWD}}
+    if: contains(github.event.release.body, ${{CORE_PUBLISH_KWD}})
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
