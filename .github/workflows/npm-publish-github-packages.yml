@@ -34,6 +34,8 @@ jobs:
           registry-url: https://npm.pkg.github.com/
       - run: cd ./core && npm ci
       - run: cd ./core && npm run build
+      - run: |
+          cd ./code
+          echo "@username:registry=https://registry.npmjs.org" >> .npmrc
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> .npmrc
       - run: cd ./core && npm publish --access=public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
