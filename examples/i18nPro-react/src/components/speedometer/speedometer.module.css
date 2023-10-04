@@ -1,0 +1,23 @@
+.range-line {
+  @apply h-1/2 w-full 
+  border-2 border-slate-400  border-b-0 box-border border-solid rounded-t-full
+  absolute top-0 left-[50%] -translate-x-[50%]
+}
+.dot-container{
+  @apply h-full w-full transition-all ease-in-out duration-300
+}
+.dot {
+  @apply absolute left-1/2 -translate-x-[50%] -translate-y-[50%] rounded-full bg-[#202022] bg-opacity-90 shadow-[0_0_3px_0] shadow-slate-100
+}
+.value-box{
+  @apply absolute bottom-0 w-full h-1/2 -translate-y-[50%] flex items-center justify-center
+}
+.range{
+  @apply absolute bottom-0 h-1/2 text-xs truncate
+}
+.range-start{
+  @apply range left-0 -translate-x-1/2 pt-2
+}
+.range-end{
+  @apply range right-0 translate-x-1/2 pt-2
+}

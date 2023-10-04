@@ -1,4 +1,10 @@
-body {
-  margin: 0;
-  background: linear-gradient(to bottom right, #303030, #505050) no-repeat fixed;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+
+  body {
+    @apply m-0 from-[#303030] to-[#505050] bg-gradient-to-br bg-fixed bg-no-repeat h-screen w-screen text-slate-50 font-sans
+  }
 }

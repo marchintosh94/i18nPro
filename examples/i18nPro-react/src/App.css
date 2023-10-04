@@ -3,14 +3,3 @@
   width: 100vw;
   overflow-x: hidden;
 }
-
-.logo {
-  max-width: 24rem;
-  margin: auto;
-  display: block;
-}
-
-.grid {
-  display: grid;
-  grid-column: auto;
-}
