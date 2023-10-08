@@ -10,7 +10,7 @@
       "strict": true,
       "noImplicitAny": true,
       "noUncheckedIndexedAccess": true,
-    "allowUnreachableCode": false,
+      "allowUnreachableCode": false,
       "skipLibCheck": true,
       "moduleResolution": "node",
     }

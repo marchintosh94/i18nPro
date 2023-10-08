@@ -7,4 +7,7 @@
   body {
     @apply m-0 from-[#303030] to-[#505050] bg-gradient-to-br bg-fixed bg-no-repeat h-screen w-screen text-slate-50 font-sans
   }
+  h2 {
+    @apply text-2xl font-medium
+  }
 }
