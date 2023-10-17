@@ -1,18 +1,18 @@
 {
   "name": "@marchintosh94/i18n-pro",
   "version": "0.1.1",
-  "description": "Translation library for i18n (TS)",
+  "description": "Translation library i18n (TS)",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "prepack": "rm -rf dist/ && cp package.json _package.json && json -f package.json -I -e \"delete this.devDependencies; delete this.dependencies; delete this.scripts\"",
-    "build": "npm run prepack &&  tsc --project tsconfig.build.json && tsc-alias && rm package.json && mv _package.json package.json",
+    "clean": "rm -rf dist/",
+    "compile": "tsc -p ./tsconfig.build.json",
+    "build": "npm run clean && npm run compile",
     "test": "jest",
-    "coverage": "jest --coverage",
-    "build:link": "npm run build"
+    "coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
