@@ -1,4 +1,4 @@
-import { ChangeLanguage } from "types/i18npro.types";
+import { ChangeLanguage } from "../types/i18npro.types";
 import { DynamicData, I18Message, I18Dictionary } from "../types";
 import { http, objectKeysToLower } from "../utils";
 
