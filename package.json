@@ -1,6 +1,6 @@
 {
   "name": "@marchintosh94/i18n-pro",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Translation library i18n (TS)",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
