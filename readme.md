@@ -1,27 +1,30 @@
-<div style="display:flex;justify-content: center">
-    <img src="./assets/i18nPro.png" width="300"/>
+<div style="display:flex;justify-content: center;">
+    <img src="./assets/i18nPro.png" width="400"/>
+    <div>
+        <img src="./assets/ts.png" width="40"/>
+    </div>
 </div>
+
+<h1 style="width:100%;text-align:center;margin:3rem 0;">@marchintosh94/i18n-pro</h1>
 
 ## Introduction
 
-i18nPro is a powerful internationalization library for web applications. It provides a seamless way to manage translations and pluralization in multiple languages. This library is made up of a core library written in TypeScript and specific implementation for main web application libraries/framework.
-This documentation will guide you through the installation, setup, and usage of i18nPro.
+i18nPro is a powerful internationalization library for web applications. It provides a seamless way to manage translations and pluralization in multiple languages. This is the core library and this documentation will guide you through the installation, setup, and usage of i18nPro.
 
 
 ## 📄 Table of Contents
 
 1. [Installation](#installation)
 2. [Configuration](#configuration)
-3. [Getting Started](#getting-started)
-    - [i18nPro - Core](#i18npro---core)
-    - [i18nPro - React](#i18npro---react)
-4. [Usage](#usage)
-    - [Basic Usage](#basic-usage)
-    - [Pluralization](#pluralization)
-    - [JSON Translations](#json-translations)
-        - [Simple](#simple)
-        - [Pluralization](#pluralization-1)
+3. [Usage](#usage)
+    - [Load Translations](#load-external-translation-loadmessages)
+    - [Inject Translations](#load-translation-manually-loadlocalmessages)
+    - [Change Language](#change-language-changelanguage)
+    - [Translate](#translate-t)
+        - [Pluralization](#pluralization)
         - [Dynamic Data](#dynamic-data)
+    - [JSON Translations](#json-translations)
+4. [React](#react---i18npro-react)
 5. [License](#license)
 
 ## Installation
@@ -36,7 +39,7 @@ yarn add @marchintosh94/i18n-pro
 
 - `defaultLocale` (string): The default language to use if no language is specified.
 
-Import the i18nPro module and set your desired configuration:
+Import the i18nPro module and set your desired configuration in the entry point of your application:
 
 ```typescript
 // src/index.ts
@@ -47,50 +50,76 @@ i18nPro.defaultLocale = 'en-US'
 
 //... other
 ```
-## Getting Started
-
-i18nPro is made up of a core library and their implementation for specific libraries/framework.
-
-### 🧬 i18nPro - Core
-This is the main library where core functionalities are available and it does not have any dependency on any framework. So you can install i18nPro and create your implementation for your favourite framework or library.
-
-[🔗 Go to i18nPro - Core](./core/README.md)  
- 
-
-### <img src="./assets/react.png" width="20"/>&nbsp;&nbsp;i18nPro - React
-
-This is the implementation of main library for React. i18nPro-react exposes all the core functionalities and utilities to adapt them to React ecosystem.
-
-[🔗 Go to i18nPro - React](./core/README.md)  
-
 ## Usage
 
-### Basic Usage
+### Load external translation: `loadMessages` 
+This method allows to change current locale and load the dictionary from remote server via HTTP.
+```typescript
+import { i18nPro } from '@marchintosh94/i18n-pro'
+
+
+// Set the locale and load translation dictionary from external url
+await i18nPro.loadMessages('en', 'https://cdn.site.dev/translations/en.json')
+const welcome = i18nPro.t('welcome');
+```
+### Load translation manually: `loadLocalMessages`
+This method allows to change current locale andload the dictionary directly from the local environment.
 
 ```typescript
 import { i18nPro } from '@marchintosh94/i18n-pro'
 
-// Translate a string
-const greeting = i18nPro.t('greeting'); // Uses the default language
 
-// Translate a string in a specific language loaded from cdn
-i18nPro.changeLanguage('en', 'https://cdn.site.dev/translations/en.json')
-const welcome = i18nPro.t('welcome');
+// Set the locale and load translation dictionary as string that contains the JSON object
+await i18nPro.loadLocalMessages('en', '{"Hi": "Hi"}')
+// or with a JSON object Record<string, string | number>
+const dictionary: Record<string, string | number> = {"Hi": "Hi"}
+await i18nPro.loadLocalMessages('en', dictionary)
+const welcome = i18nPro.t('Hi');
+```
+### Change Language: `changeLanguage`
+This method allows to change current locale and dynamically load the dictionary from the local environment or remote server based on the argouments passed to the function.
+```typescript
+import { i18nPro } from '@marchintosh94/i18n-pro'
+
+
+// Set the locale and load translation dictionary as string that contains the JSON object
+await i18nPro.changeLanguage('en', '{"Hi": "Hi"}')
+// or with a JSON object Record<string, string | number>
+const dictionary: Record<string, string | number> = {"Hi": "Hi"}
+await i18nPro.changeLanguage('en', dictionary)
+const welcome = i18nPro.t('Hi');
+```
+### Translate: `t`
+Once the dictionary is loaded and the locale is set, the `t` method will translate the key that is passed in if a match is found, otherwise it will return the key as default value.
+```typescript
+import { i18nPro } from '@marchintosh94/i18n-pro'
+
+const dictionary: Record<string, string | number> = {"Hi": "Hi"}
+await i18nPro.changeLanguage('en', dictionary)
+
+//
+const welcome = i18nPro.t('Hi');
 ```
 
-### Pluralization
-
+#### Pluralization
 ```json
-// en.json
-
 {
-  "apples": "There is one apple | There are {count} apples"
+    "apple": "0 apples| 1 apple | 2 apples ",
 }
 ```
-
 ```typescript
-const apples = i18nPro.t('apples', 2, { count: 3 });
-// Output: "There are 3 apples"
+const apples = i18nPro.t('apple', 1);
+// Output: "I'd like 1 apples"
+```
+#### Dynamic Data
+```json
+{
+    "tranlsation_key": "Hi, my name is {my_name}",
+}
+```
+```typescript
+const apples = i18nPro.t('tranlsation_key', { my_name: "Carlos" });
+// Output: "Hi, my name is Carlos"
 ```
 
 ### JSON Translations
@@ -117,10 +146,16 @@ The value in the curly braces will be replaced once the `t` method will be used 
 {
     "tranlsation_key": "Hi, my name is {my_name}",
 }
-``````
+```
+
+## <img src="./assets/react.png" width="16"/> React - I18nPro-React
+### @marchintosh/i18n-pro-react
+
+This is the implementation of main library for React. i18nPro-react exposes all the core functionalities and utilities to adapt them to React ecosystem.
+
+#### 🔗[I18nPro-react](https://github.com/marchintosh94/i18nPro-react.git)
 
 ## License
 
 This project is licensed under the [MIT License](./LICENSE).
 
----
