@@ -1,6 +1,6 @@
 {
   "name": "@marchintosh94/i18n-pro",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "description": "Translation library i18n (TS)",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -28,7 +28,8 @@
     "react",
     "next",
     "vue",
-    "angular"
+    "angular",
+    "node"
   ],
   "author": "marchintosh94 <marcobaratto@icloud.com> (https://marcobaratto.dev/)",
   "license": "MIT",
