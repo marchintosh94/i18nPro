@@ -383,4 +383,14 @@ describe('Test i18nPro class with all its methods', () => {
             freshI18nPro.changeLanguage('en', '/api')
         ])).resolves.toContain(undefined)
     })
+    it('isLocaleAvailable => should return true', async () => {
+        const freshI18nPro = new _i18nPro()
+        freshI18nPro['setLocale']('es')
+        expect(freshI18nPro.isLocaleAvailable('es')).toStrictEqual(true)
+    })
+    it('isLocaleAvailable => should return false', async () => {
+        const freshI18nPro = new _i18nPro()
+        freshI18nPro['setLocale']('es')
+        expect(freshI18nPro.isLocaleAvailable('en')).toStrictEqual(false)
+    })
 })

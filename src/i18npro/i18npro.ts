@@ -21,11 +21,6 @@ export class _i18nPro {
     return resArg0 || resArg1
   }
 
-  private setLocale(locale: string) {
-    this.storedLocales = [...new Set([...this.storedLocales, locale])];
-    this.locale = locale;
-  };
-
   private setLocaleMessages(locale: string, messages: I18Message) {
     this.messages = { ...this.messages, [locale]: objectKeysToLower(messages) };
   };
@@ -79,6 +74,15 @@ export class _i18nPro {
     } catch(err){
       return Promise.reject(err)
     }
+  }
+
+  public setLocale(locale: string) {
+    this.storedLocales = [...new Set([...this.storedLocales, locale])];
+    this.locale = locale;
+  };
+
+  public isLocaleAvailable(locale: string): boolean {
+    return this.storedLocales.includes(locale)
   }
 
   public loadMessages(
