@@ -1,8 +1,6 @@
-<div style="display:flex;justify-content: center;">
-    <img src="./assets/i18nPro.png" width="400"/>
-    <div>
-        <img src="./assets/ts.png" width="40"/>
-    </div>
+<div>
+    <img src="./assets/i18nPro.png" width="400" style="display: inline;"/>
+    <img src="./assets/ts.png" style="display:inline;" width="40"/>
 </div>
 
 <h1 style="width:100%;text-align:center;margin:3rem 0;">@marchintosh94/i18n-pro</h1>
