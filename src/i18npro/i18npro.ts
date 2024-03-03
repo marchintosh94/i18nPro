@@ -5,9 +5,9 @@ import { http, objectKeysToLower } from "../utils";
 export class _i18nPro {
   private storedLocales: string[] = [];
   private isLoadingLanguage: boolean = false;
-  private locale!: string;
   private messages: I18Dictionary = {};
-
+  
+  public locale!: string;
   public defaultLocale = "";
 
   constructor() {}
