@@ -1,0 +1,10 @@
+node_modules
+husky
+coverage
+dist
+.github
+assets
+*.md
+LICENSE
+tsconfig.*
+package*
